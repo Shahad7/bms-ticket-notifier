@@ -14,7 +14,7 @@ from html import escape
 from datetime import datetime
 from dataclasses import dataclass, field
 from urllib.parse import urlparse
-import requests
+from curl_cffi import requests
 
 # ──────────────────────────────────────────────────────────────────────
 # CONFIGURATION — edit these or set via env vars
@@ -70,6 +70,10 @@ REGION_MAP = {
     "kolkata":    ("KOLK",   "kolkata",    "22.573", "88.364", "tun"),
     "pune":       ("PUNE",   "pune",       "18.520", "73.856", "te2"),
     "kochi":      ("KOCH",   "kochi",      "9.932",  "76.267", "t9z"),
+    "trivandrum":         ("TRIV", "trivandrum", "8.5241", "76.9366", "t9w"),
+    "thiruvananthapuram": ("TRIV", "trivandrum", "8.5241", "76.9366", "t9w"),
+    "thiruvananthapuram-trivandrum": ("TRIV", "trivandrum", "8.5241", "76.9366", "t9w")
+
 }
 
 
@@ -563,6 +567,7 @@ def main():
     for dc in date_list:
         data = fetch_bms(event_code, dc, region_code,
                          region_slug_r, lat, lon, geohash)
+        print(data)
         if not data:
             print(f"  ⚠️  No data for date {dc or '(default)'}")
             continue
